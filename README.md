@@ -1,4 +1,4 @@
-# Samiksha Aveg — Portfolio
+# Portfolio Website
 
 A single-file, space-themed portfolio site (`index.html`): an Earth-from-orbit opening screen, an interactive night sky with constellations and shooting stars, and scroll-driven sections. No build step and no dependencies to install.
 
