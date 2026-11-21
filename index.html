@@ -129,7 +129,7 @@ a.card{display:block}
 
 <section class="wel" id="top" aria-label="Welcome">
   <div class="stage">
-    <canvas id="ec" role="img" aria-label="Earth seen from orbit, slowly rotating, with the sun rising over its edge"></canvas>
+    <canvas id="ec" role="img" aria-label="A red planet seen from orbit, slowly rotating, with the sun rising over its edge"></canvas>
     <div class="intro"><span class="k">Captain’s log · Welcome aboard</span><h1 class="big">Hi, I’m <span class="g">Samiksha</span>.</h1><p>Software engineer (University of Sydney, Honours) building across full-stack, machine learning and embedded systems. Space: the final frontier. Scroll to engage, and boldly go.</p></div>
     <div class="wt" id="wt"><div class="tick" aria-label="Skills"><div id="wtk"></div></div></div>
     <div class="copy"><span class="k">Portfolio · Deep field</span><h1>Samiksha Aveg</h1><p>Software engineering graduate building thoughtful software across full-stack development, machine learning, embedded systems and cloud technologies.</p>
@@ -159,7 +159,7 @@ a.card{display:block}
 
 <section class="pin contact" id="contact" style="height:160vh" data-last><div class="stage2"><div class="wrap"><span class="k rv">09 · Open channel</span><h2 class="rv">Let’s build something meaningful.</h2><p class="cp rv">Get in touch about software engineering opportunities and collaboration.</p><div class="rad rv"><i></i><i></i><i></i><a class="mag" href="mailto:samikshaaveg@gmail.com">Email Samiksha</a></div><p class="links rv"><a href="mailto:samikshaaveg@gmail.com">samikshaaveg@gmail.com</a><a href="https://www.linkedin.com/in/samikshaaveg" target="_blank" rel="noopener">LinkedIn · samikshaaveg</a><a href="https://github.com/S-A-M-22" target="_blank" rel="noopener">GitHub · S-A-M-22</a></p></div></div></section>
 </main>
-<footer>Live long and prosper · Samiksha Aveg · Earth imagery courtesy of NASA</footer>
+<footer>Live long and prosper · Samiksha Aveg · Planet surface derived from NASA imagery</footer>
 </div>
 
 <script>
@@ -294,9 +294,9 @@ function ebuild(){EW=ec.clientWidth;EH=ec.clientHeight;ec.width=EW;ec.height=EH;
   A.push((py*lw+px)*4);B.push((lon/(2*PI)+.5)*TW);C.push(ty|0);F.push(ty-(ty|0));D.push(nx*Lx+ny*Ly+nz*Lz);E.push(Math.pow(1-nz,2.4));G.push(cl((eR-Math.sqrt(r2))*rs/1.3)*255);N.push(Math.pow(Math.max(0,(nx*hv[0]+ny*hv[1]+nz*hv[2])/hl),14))}
  pos=Int32Array.from(A);lonT=Float32Array.from(B);rowI=Int32Array.from(C);rowF=Float32Array.from(F);dif=Float32Array.from(D);hzA=Float32Array.from(E);alp=Uint8Array.from(G);nhA=Float32Array.from(N);
  glo=glo||document.createElement('canvas');glo.width=EW;glo.height=Math.ceil(s+160);const g=glo.getContext('2d'),gr=g.createLinearGradient(0,0,EW,0);
- gr.addColorStop(0,'rgba(40,110,255,.35)');gr.addColorStop(.65,'rgba(80,160,255,.9)');gr.addColorStop(1,'rgba(160,215,255,.95)');
- g.strokeStyle=gr;g.shadowColor='rgba(50,120,255,1)';g.shadowBlur=70;g.lineWidth=5;g.beginPath();g.arc(ecx,ecy,eR+2,0,PI*2);g.stroke();
- g.shadowBlur=10;g.lineWidth=2;g.strokeStyle='rgba(190,225,255,.85)';g.stroke();
+ gr.addColorStop(0,'rgba(255,90,40,.35)');gr.addColorStop(.65,'rgba(255,125,60,.9)');gr.addColorStop(1,'rgba(255,200,150,.95)');
+ g.strokeStyle=gr;g.shadowColor='rgba(255,100,40,1)';g.shadowBlur=70;g.lineWidth=5;g.beginPath();g.arc(ecx,ecy,eR+2,0,PI*2);g.stroke();
+ g.shadowBlur=10;g.lineWidth=2;g.strokeStyle='rgba(255,200,160,.85)';g.stroke();
  ES=Array.from({length:Math.round(EW/9)},()=>({x:Math.random()*EW,y:Math.random()*EH,s:Math.random()*1.3+.3,z:Math.random(),ph:Math.random()*6.28}))}
 function shadePlanet(){
  const d=img.data,n=pos.length;
@@ -305,12 +305,14 @@ function shadePlanet(){
   const a=(y0*TW+x0)<<2,b=(y0*TW+x1)<<2,c2=(y1*TW+x0)<<2,d2=(y1*TW+x1)<<2,w1=(1-fx)*(1-fy),w2=fx*(1-fy),w3=(1-fx)*fy,w4=fx*fy;
   const r=DAY[a]*w1+DAY[b]*w2+DAY[c2]*w3+DAY[d2]*w4,g=DAY[a+1]*w1+DAY[b+1]*w2+DAY[c2+1]*w3+DAY[d2+1]*w4,bl=DAY[a+2]*w1+DAY[b+2]*w2+DAY[c2+2]*w3+DAY[d2+2]*w4;
   let xc=lonT[i]-crot;if(xc<0)xc+=TW;const rc=((y0*.75)|0)*CW,ci=rc+((xc*.75)|0),cs=rc+(((xc+5)%TW*.75)|0);
-  const c=cl((CLD[ci]/255-.1)*1.6),sh=cl((CLD[cs]/255-.1)*1.6),dd=cl(dif[i]*1.3+.12),lit=.06+.94*dd,hz=hzA[i],k=c*.9,sd=1-.4*sh*dd;
-  let R=(r*sd*(1-k)+244*k)*lit+3,G=(g*sd*(1-k)+247*k)*lit+6,B=(bl*sd*(1-k)+255*k)*lit+16;
-  const spc=nhA[i]*(WAT[(y0>>1)*1024+(x0>>1)]/255)*(1-c)*dd*.8;R+=255*spc;G+=235*spc;B+=210*spc;
-  const hh=hz*(.25+.9*dd);R+=70*hh;G+=150*hh;B+=255*hh;
-  const t=(dd-.2)/.12,tw=Math.exp(-t*t)*hz*.3;R+=255*tw;G+=130*tw;B+=60*tw;
-  const nl=LGT[y0*TW+x0]/255*(1-dd)*(1-dd)*(1-c*.85)*1.6;R+=255*nl;G+=196*nl;B+=110*nl;
+  const c=cl((CLD[ci]/255-.05)*1.9),sh=cl((CLD[cs]/255-.05)*1.9),dd=cl(dif[i]*1.3+.18),lit=.08+.92*dd,hz=hzA[i],k=c*.9,sd=1-.35*sh*dd;
+  const lum=(.3*r+.59*g+.11*bl)/255,oc=cl((bl-r)/60)*.85,tt=cl((lum-.12)/.45),sn=cl((lum-.62)/.2);
+  let lr,lg,lb;if(tt<.5){const u=tt*2;lr=98+98*u;lg=38+54*u;lb=22+22*u}else{const u=(tt-.5)*2;lr=196+44*u;lg=92+92*u;lb=44+84*u}
+  lr+=(246-lr)*sn;lg+=(228-lg)*sn;lb+=(205-lb)*sn;
+  const br=(lr+((54+lum*210)-lr)*oc)*sd,bg=(lg+((40+lum*150)-lg)*oc)*sd,bb=(lb+((58+lum*130)-lb)*oc)*sd;
+  let R=(br*(1-k)+240*k)*lit+6,G=(bg*(1-k)+222*k)*lit+3,B=(bb*(1-k)+205*k)*lit+4;
+  const hh=hz*(.3+.9*dd)*.9;R+=255*hh;G+=125*hh;B+=60*hh;
+  const t2=(dd-.2)/.12,tw=Math.exp(-t2*t2)*hz*.3;R+=255*tw;G+=110*tw;B+=70*tw;
   const o=pos[i];d[o]=R;d[o+1]=G;d[o+2]=B;d[o+3]=alp[i]}
  lctx.putImageData(img,0,0)}
 function eframe(now){
@@ -325,10 +327,10 @@ function eframe(now){
   const fade=cl((now-readyT)/1100);ex.globalAlpha=fade;ex.drawImage(glo,0,0);ex.drawImage(lc,0,0,lw,lh,0,0,lw/rs,lh/rs);
   const sx=EW*.7,sy=ecy+Math.sqrt(Math.max(0,eR*eR-(sx-ecx)*(sx-ecx))),pu=1+.06*Math.sin(now*.002),W2=EW*.12*pu;
   ex.globalCompositeOperation='lighter';let g=ex.createRadialGradient(sx,sy,0,sx,sy,W2);
-  g.addColorStop(0,'rgba(255,255,255,1)');g.addColorStop(.12,'rgba(210,225,255,.7)');g.addColorStop(.4,'rgba(90,140,255,.22)');g.addColorStop(1,'rgba(90,140,255,0)');ex.fillStyle=g;ex.fillRect(sx-W2,sy-W2,W2*2,W2*2);
-  ex.save();ex.translate(sx,sy);ex.scale(1,.05);g=ex.createRadialGradient(0,0,0,0,0,EW*.3);g.addColorStop(0,'rgba(200,220,255,.5)');g.addColorStop(1,'rgba(200,220,255,0)');ex.fillStyle=g;ex.beginPath();ex.arc(0,0,EW*.3,0,PI*2);ex.fill();ex.restore();
-  ex.globalAlpha=fade*cl(1-(ps-.06)/.2);ex.strokeStyle='rgba(255,70,45,.34)';ex.lineWidth=3;ex.beginPath();ex.arc(sx,sy+EH*.05,EW*.085,0,PI*2);ex.stroke();
-  const sh=ps*EW*.08;[[sx-EW*.155+sh,sy+EH*.2,EW*.02,'rgba(255,150,80,.2)'],[sx-EW*.3+sh*1.6,sy+EH*.42,EW*.045,'rgba(110,130,255,.07)']].forEach(q=>{ex.fillStyle=q[3];ex.beginPath();ex.arc(q[0],q[1],q[2],0,PI*2);ex.fill()});
+  g.addColorStop(0,'rgba(255,255,255,1)');g.addColorStop(.12,'rgba(255,225,190,.7)');g.addColorStop(.4,'rgba(255,140,70,.22)');g.addColorStop(1,'rgba(255,140,70,0)');ex.fillStyle=g;ex.fillRect(sx-W2,sy-W2,W2*2,W2*2);
+  ex.save();ex.translate(sx,sy);ex.scale(1,.05);g=ex.createRadialGradient(0,0,0,0,0,EW*.3);g.addColorStop(0,'rgba(255,220,190,.5)');g.addColorStop(1,'rgba(255,220,190,0)');ex.fillStyle=g;ex.beginPath();ex.arc(0,0,EW*.3,0,PI*2);ex.fill();ex.restore();
+  ex.globalAlpha=fade*cl(1-(ps-.06)/.2);ex.strokeStyle='rgba(120,200,255,.3)';ex.lineWidth=3;ex.beginPath();ex.arc(sx,sy+EH*.05,EW*.085,0,PI*2);ex.stroke();
+  const sh=ps*EW*.08;[[sx-EW*.155+sh,sy+EH*.2,EW*.02,'rgba(120,200,255,.14)'],[sx-EW*.3+sh*1.6,sy+EH*.42,EW*.045,'rgba(110,130,255,.07)']].forEach(q=>{ex.fillStyle=q[3];ex.beginPath();ex.arc(q[0],q[1],q[2],0,PI*2);ex.fill()});
   ex.globalCompositeOperation='source-over';ex.globalAlpha=1}
  if(WS.ship||ps<.5)drawShip(ex,EW,EH,WS,now,dt,true);
  const sh=!!WS.ship;if(WS.prev&&!sh){WS.cnt=(WS.cnt||0)+1;WS.tgl=now}WS.prev=sh;
